@@ -6,6 +6,7 @@ import router from './router'
 
 import './assets/main.css'
 import 'element-plus/dist/index.css'
+import 'element-plus/theme-chalk/display.css'
 
 const app = createApp(App)
 

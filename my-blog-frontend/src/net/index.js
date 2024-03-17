@@ -52,7 +52,8 @@ function deleteAccessToken() {
 }
 
 function internalPost(url, data, headers, success, failure, error = defaultError){
-    axios.post(url, data, { headers: headers }).then(({data}) => {
+    axios.post(url, data, { headers: headers })
+        .then(({data}) => {
         if(data.code === 200)
             success(data.data);
         else
@@ -82,10 +83,6 @@ function login(username, password, remember, success, failure = defaultFailure){
     }, failure);
 }
 
-function post(url, data, success, failure = defaultFailure) {
-    internalPost(url, data, accessHeader() , success, failure);
-}
-
 function logout(failure = defaultFailure){
     get('/api/auth/logout', () => {
         deleteAccessToken();
@@ -93,12 +90,16 @@ function logout(failure = defaultFailure){
     }, failure);
 }
 
-function get(url, success, failure) {
-    internalGet(url, accessHeader(), success, failure = defaultFailure);
+function post(url, data, success, failure = defaultFailure) {
+    internalPost(url, data, accessHeader(), success, failure);
+}
+
+function get(url, success, failure = defaultFailure) {
+   internalGet(url, accessHeader(), success, failure);
 }
 
 function unauthorized() {
-    return !takeAccessToken();
+    return takeAccessToken().isEntry;
 }
 
 export { post, get, login, logout, unauthorized }

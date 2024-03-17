@@ -28,9 +28,9 @@ import HeaderMenu from "@/components/main/HeaderMenu.vue";
   .main-container {
     min-height: 91vh;
     max-height: 91vh;
-    box-shadow: 12px 12px 12px rgba(0, 0, 0, 0.07),
-    8px 8px 12px rgba(0, 0, 0, 0.05) inset,
-    100px 100px 80px rgba(0, 0, 0, 0.035);
+    //box-shadow: 12px 12px 12px rgba(0, 0, 0, 0.07),
+    //8px 8px 12px rgba(0, 0, 0, 0.05) inset,
+    //100px 100px 80px rgba(0, 0, 0, 0.035);
     overflow: hidden;
     border-radius: 8px;
   }

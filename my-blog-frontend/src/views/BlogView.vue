@@ -1,23 +1,31 @@
 <script setup>
-import UserInfo from "@/components/account/UserInfo.vue";
+import UserInfo from "@/components/blog/UserInfo.vue";
 import Essay from "@/components/blog/essay.vue";
 </script>
 
 <template>
   <div class="common-layout">
-    <el-container>
-      <el-aside width="80vw">
-        <essay/>
-      </el-aside>
-      <el-main>
-        <user-info/>
-      </el-main>
-    </el-container>
+    <el-row :gutter="10">
+<!--      左侧文章内容展示-->
+      <el-col :span="20">
+        <div class="grid-content">
+          <essay/>
+        </div>
+      </el-col>
+<!--      右侧用户简讯展示-->
+      <el-col :span="4">
+        <div class="grid-content">
+          <user-info/>
+        </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <style scoped lang="less">
 .common-layout{
+  width: 100%;
   padding: 0 0.8rem;
 }
+
 </style>
