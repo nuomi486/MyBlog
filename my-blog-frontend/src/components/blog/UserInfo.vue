@@ -1,8 +1,3 @@
-<script setup>
-
-import Card from "@/components/model/card.vue";
-</script>
-
 <template>
   <card>
     <template #header>
@@ -14,6 +9,12 @@ import Card from "@/components/model/card.vue";
     </template>
   </card>
 </template>
+
+<script setup>
+import Card from "@/components/model/card.vue";
+
+
+</script>
 
 <style scoped lang="less">
 .users{

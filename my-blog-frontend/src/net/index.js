@@ -71,7 +71,7 @@ function internalGet(url, headers, success, failure, error = defaultError){
 }
 
 function login(username, password, remember, success, failure = defaultFailure){
-    internalPost('/api/auth/login', {
+    internalPost('/login', {
         username: username,
         password: password
     }, {
@@ -84,10 +84,16 @@ function login(username, password, remember, success, failure = defaultFailure){
 }
 
 function logout(failure = defaultFailure){
-    get('/api/auth/logout', () => {
+    get('/logout', () => {
         deleteAccessToken();
         ElMessage.success(`退出登录成功，欢迎您再次使用`);
     }, failure);
+}
+
+function getInfo() {
+    const str = localStorage.getItem(authItemName) || sessionStorage.getItem(authItemName);
+    if(!str) return ElMessage.info("暂未获取到token，请进行登陆后再试！");
+
 }
 
 function post(url, data, success, failure = defaultFailure) {
@@ -102,4 +108,4 @@ function unauthorized() {
     return takeAccessToken().isEntry;
 }
 
-export { post, get, login, logout, unauthorized }
+export { post, get, login, logout, getInfo, unauthorized }

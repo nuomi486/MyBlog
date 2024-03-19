@@ -6,10 +6,12 @@ import java.util.Date;
 
 @Data
 public class AccountDTO {
-    int id;
+    Integer id;
     String username;
     String password;
     String email;
     String role;
+    Long phone_number;
+    String headshot;
     Date createdate;
 }

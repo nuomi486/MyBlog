@@ -2,7 +2,7 @@ package com.myblog.config;
 
 import com.myblog.entity.vo.Account;
 import com.myblog.entity.RestBean;
-import com.myblog.filter.JwtAuthorizeFeilter;
+import com.myblog.filter.JetAuthorizeFilter;
 import com.myblog.entity.dto.AccountDTO;
 import com.myblog.service.AuthorizeService;
 import com.myblog.utils.JwtUtils;
@@ -36,7 +36,7 @@ public class SecurityConfiguration{
     AuthorizeService authorizeService;
 
     @Resource
-    JwtAuthorizeFeilter authorizeFilter;
+    JetAuthorizeFilter authorizeFilter;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity security) throws Exception {
@@ -46,12 +46,12 @@ public class SecurityConfiguration{
                         .anyRequest().authenticated()  // 其他请求需要进行身份验证
                 )
                 .formLogin(conf -> conf
-                        .loginProcessingUrl("/api/auth/login")  // 配置登录请求的处理URL
+                        .loginProcessingUrl("/login")  // 配置登录请求的处理URL
                         .successHandler(this::onAuthenticationHandle)  // 登录成功时的处理器
                         .failureHandler(this::onAuthenticationHandle)  // 登录失败时的处理器
                 )
                 .logout(conf -> conf
-                        .logoutUrl("/api/auth/logout")  // 配置登出请求的URL
+                        .logoutUrl("/logout")  // 配置登出请求的URL
                         .logoutSuccessHandler(this::onLogoutSuccessHandle)
                 )
                 .exceptionHandling(conf -> conf
