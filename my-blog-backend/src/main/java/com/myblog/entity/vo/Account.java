@@ -10,7 +10,7 @@ public class Account {
     String email;
     String role;
     Long phone_number;
-    String headshot;
+    String img;
     Date createdate;
     String token;
     Date expire;

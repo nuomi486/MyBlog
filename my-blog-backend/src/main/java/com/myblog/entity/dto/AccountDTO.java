@@ -12,6 +12,6 @@ public class AccountDTO {
     String email;
     String role;
     Long phone_number;
-    String headshot;
+    String img;
     Date createdate;
 }

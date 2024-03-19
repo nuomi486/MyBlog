@@ -4,5 +4,5 @@ import com.myblog.entity.vo.Account;
 
 public interface AccountServer {
 
-    Account getUserInfo(Object obj);
+    Account getUserInfo();
 }

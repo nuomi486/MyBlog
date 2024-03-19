@@ -54,19 +54,20 @@ function deleteAccessToken() {
 function internalPost(url, data, headers, success, failure, error = defaultError){
     axios.post(url, data, { headers: headers })
         .then(({data}) => {
-        if(data.code === 200)
-            success(data.data);
-        else
-            failure(data.message, data.code, url);
+            if(data.code === 200)
+                success(data.data);
+            else
+                failure(data.message, data.code, url);
     }).catch(err => error(err));
 }
 
-function internalGet(url, headers, success, failure, error = defaultError){
-    axios.get(url, { headers: headers }).then(({data}) => {
-        if(data.code === 200)
-            success(data.data);
-        else
-            failure(data.message, data.code, url);
+function internalGet(url, success, failure, error = defaultError){
+    axios.get(url)
+        .then(({data}) => {
+            if(data.code === 200)
+                success(data.data);
+            else
+                failure(data.message, data.code, url);
     }).catch(err => error(err));
 }
 
@@ -90,22 +91,16 @@ function logout(failure = defaultFailure){
     }, failure);
 }
 
-function getInfo() {
-    const str = localStorage.getItem(authItemName) || sessionStorage.getItem(authItemName);
-    if(!str) return ElMessage.info("暂未获取到token，请进行登陆后再试！");
-
-}
-
 function post(url, data, success, failure = defaultFailure) {
     internalPost(url, data, accessHeader(), success, failure);
 }
 
 function get(url, success, failure = defaultFailure) {
-   internalGet(url, accessHeader(), success, failure);
+   internalGet(url, success, failure);
 }
 
 function unauthorized() {
     return takeAccessToken().isEntry;
 }
 
-export { post, get, login, logout, getInfo, unauthorized }
+export { post, get, login, logout, unauthorized }

@@ -2,8 +2,8 @@
   <card>
     <template #header>
       <div class="users" >
-        <img style="width: 80px;height: 80px;border-radius: 50%;" src="https://ts1.cn.mm.bing.net/th?id=OIP-C.0kSGVdYW_FVz2hDaE6rnvwAAAA&w=150&h=150&c=8&rs=1&qlt=90&o=6&dpr=1.2&pid=3.1&rm=2" alt="头像">
-        <p>StickyR</p>
+        <img style="width: 80px;height: 80px;border-radius: 50%;" :src="userInfo.img" alt="头像">
+        <p>{{ userInfo.username }}</p>
         <span style="font-size: 12px;">这个人很懒，没有留下个性签！！</span>
       </div>
     </template>
@@ -12,8 +12,18 @@
 
 <script setup>
 import Card from "@/components/model/card.vue";
+import {get} from "@/net";
+import { ref } from "vue";
 
+let userInfo = ref({});
 
+function getInfo() {
+  get('/api/auth/account/getDetail', (data)=>{
+      userInfo.value = data;
+  })
+}
+
+getInfo();
 </script>
 
 <style scoped lang="less">

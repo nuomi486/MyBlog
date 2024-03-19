@@ -6,17 +6,19 @@ import com.myblog.service.AccountServer;
 import com.myblog.service.AuthorizeService;
 import jakarta.annotation.Resource;
 import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AccountServerImpl implements AccountServer {
 
     @Resource
     AuthorizeService authorizeService;
 
     @Override
-    public Account getUserInfo(Object obj) {
-        AccountDTO zhangsan = authorizeService.findByUserName("zhangsan");
+    public Account getUserInfo() {
+        AccountDTO stickyR = authorizeService.findByUserName("stickyR");
         Account account = new Account();
-        BeanUtils.copyProperties(zhangsan, account);
-        return null;
+        BeanUtils.copyProperties(stickyR, account);
+        return account;
     }
 }
