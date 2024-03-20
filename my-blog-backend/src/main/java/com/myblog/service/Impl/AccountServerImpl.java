@@ -6,6 +6,7 @@ import com.myblog.service.AccountServer;
 import com.myblog.service.AuthorizeService;
 import jakarta.annotation.Resource;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,6 +14,9 @@ public class AccountServerImpl implements AccountServer {
 
     @Resource
     AuthorizeService authorizeService;
+
+    @Resource
+    StringRedisTemplate stringRedisTemplate;
 
     @Override
     public Account getUserInfo() {

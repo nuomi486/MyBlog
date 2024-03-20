@@ -16,7 +16,6 @@ public class accountController{
     @Resource
     AccountServer accountServer;
 
-    //TODO 这里要重新写一个server来支持该方法的运作，要不然就会出现拿着其他令牌直接返回别人的数据
     @GetMapping("/getDetail")
     public RestBean<Account> getUserDetail(){
         Account userInfo = accountServer.getUserInfo();

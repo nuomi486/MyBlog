@@ -13,5 +13,6 @@ public class AccountDTO {
     String role;
     Long phone_number;
     String img;
+    String motto;
     Date createdate;
 }

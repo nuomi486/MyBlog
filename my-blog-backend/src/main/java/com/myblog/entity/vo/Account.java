@@ -11,6 +11,7 @@ public class Account {
     String role;
     Long phone_number;
     String img;
+    String motto;
     Date createdate;
     String token;
     Date expire;
