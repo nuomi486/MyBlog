@@ -2,7 +2,7 @@
   <div class="header">
     <h1>Blog_</h1>
     <div class="routerTitle">
-      <h2 class="routerName" v-for="childrenName in children">
+      <h2 class="routerName" v-for="(childrenName, index) in children" :key="index">
         <router-link :to="childrenName.path">{{childrenName.name}}</router-link>
       </h2>
     </div>
@@ -19,6 +19,8 @@ routes.map((value)=>{
   if (value.name === 'main')
     children = value.children;
 });
+
+
 </script>
 
 <style>
