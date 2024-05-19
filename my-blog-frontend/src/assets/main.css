@@ -1,0 +1,40 @@
+@import './base.css';
+
+#app {
+  max-width: 100vw;
+  max-height: 100vh;
+  font-weight: normal;
+}
+
+a {
+  text-decoration: none; /* 去除下划线 */
+  color: inherit; /* 继承父元素的颜色 */
+  cursor: auto; /* 恢复默认光标 */
+  /* 可以根据需要覆盖其他样式属性 */
+}
+/*图片占满*/
+.img{
+  width: 100%;
+  height: 100%;
+}
+
+.dark{
+  background-color: #1e262d;
+  color: #e7e4e4;
+
+  .main-container{
+    background: black;
+  }
+
+}
+.light{
+  background-image: linear-gradient(to right bottom, #f4f4f4, #f4f3f4, #f4f3f4, #f5f2f3, #f6f1f1);
+  color: #5b3e3e;
+
+  .main-container{
+    background: white;
+  }
+
+
+
+}
