@@ -8,3 +8,7 @@ spring:
     jwt:
       key: abcdefghjk
       expire: 3
+#存储上传路径
+#TODO 这是开发者测试用环境，要上云(linux)的话记得改成对应路径
+prop:
+  upload-folder: D:/upload/

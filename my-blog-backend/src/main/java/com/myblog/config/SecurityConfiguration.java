@@ -43,6 +43,7 @@ public class SecurityConfiguration{
         return security
                 .authorizeHttpRequests(conf -> conf
                         .requestMatchers("/api/auth/**").permitAll()  // 对以 "/api/auth/" 开头的请求允许所有访问
+                        .requestMatchers("/upload/**").permitAll() //放行/upload/**让前端访问这个上传文件，再通过config配置类映射到本地的/upload/文件
                         .anyRequest().authenticated()  // 其他请求需要进行身份验证
                 )
                 .formLogin(conf -> conf
