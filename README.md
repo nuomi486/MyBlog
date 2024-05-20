@@ -5,6 +5,10 @@
 4. 后端开发采用：spring boot@3, java, mybatis, MySQL, Maven
 5. 使用Redis缓存
 
+## 目前实现的功能
+- [x] 首页展示
+
+
 
 
 
