@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
+    "@vavt/v3-extension": "^1.2.2",
     "axios": "^1.4.0",
     "less": "^4.2.0",
     "md-editor-v3": "^4.13.0",

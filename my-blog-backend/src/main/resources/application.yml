@@ -1,9 +1,15 @@
 spring:
+  servlet:
+    multipart:
+      #限制上传文件大小
+      max-file-size: 3MB
+  #数据库配置
   datasource:
     url: jdbc:mysql://localhost:3306/study?characterEncoding=UTF-8&useSSL=true&serverTimezone=Asia/Shanghai
     username: root
     password: 200104
     driver-class-name: com.mysql.cj.jdbc.Driver
+  #令牌设置
   security:
     jwt:
       key: abcdefghjk

@@ -1,9 +1,12 @@
 package com.myblog.mappers;
 
 import com.myblog.entity.dto.ArticlesDTO;
+import com.myblog.entity.vo.Category;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.Date;
 import java.util.List;
 
 @Mapper
@@ -20,4 +23,10 @@ public interface ArticlesMapper {
 
     @Select("SELECT * FROM articles WHERE status = '已发布' AND articleId = #{id}")
     ArticlesDTO findById(Integer id);
+
+    @Select("SELECT * FROM categories")
+    List<Category> categoryFindByAll();
+
+    @Insert("INSERT INTO articles (title, content, categoryId, authorId, createdAt) VALUE (#{title}, #{content}, #{categoryId}, #{authorId}, #{createdAt})")
+    Boolean pushEssay(String title, String content, Integer categoryId, Integer authorId, Date createdAt);
 }

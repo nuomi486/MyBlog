@@ -66,7 +66,6 @@ const formatDateTime = (time) => {
   }
 
   .context{
-    position: relative;
     max-width: 70vw;
 
     .essay-items{

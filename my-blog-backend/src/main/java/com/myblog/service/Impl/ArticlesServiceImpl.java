@@ -1,8 +1,8 @@
 package com.myblog.service.Impl;
 
-import com.myblog.entity.RestBean;
 import com.myblog.entity.dto.ArticlesDTO;
 import com.myblog.entity.vo.Articles;
+import com.myblog.entity.vo.Category;
 import com.myblog.mappers.ArticlesMapper;
 import com.myblog.service.ArticlesService;
 import jakarta.annotation.Resource;
@@ -56,6 +56,20 @@ public class ArticlesServiceImpl implements ArticlesService {
         } catch (IOException e) {
             return "保存文件异常:" + e.getMessage();
         }
-        return "http://localhost:8080/upload/" + filename;
+        return "/upload/" + filename;
+    }
+
+    @Override
+    public List<Category> getTags() {
+        return articlesMapper.categoryFindByAll();
+    }
+
+    @Override
+    public Boolean pushEssay(Articles articles) {
+        return articlesMapper.pushEssay(articles.getTitle(),
+                articles.getContent(),
+                articles.getCategoryId(),
+                articles.getAuthorId(),
+                articles.getCreatedAt());
     }
 }

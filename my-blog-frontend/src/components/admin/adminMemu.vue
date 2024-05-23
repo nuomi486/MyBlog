@@ -30,11 +30,9 @@
 </template>
 
 <script setup>
-import {computed, reactive, ref} from 'vue'
+import {computed, reactive} from 'vue'
 import {
-  Document,
   Menu as IconMenu,
-  Location,
   Setting,
 } from '@element-plus/icons-vue'
 import {useRoute, useRouter} from "vue-router";
@@ -61,11 +59,12 @@ routers.map((item)=>{
   }
 });
 
+
 </script>
 
 <style lang="less" scoped>
 .el-menu-vertical:not(.el-menu--collapse) {
-  width: 200px;
+  max-width: 200px;
   min-height: 400px;
 }
 </style>

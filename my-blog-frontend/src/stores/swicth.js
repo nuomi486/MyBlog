@@ -4,14 +4,10 @@ export const useSwitchStores = defineStore("switch",()=>{
 
     const adminMemuSwitch = ref(false);
 
-    function switchTarget(name){
-        switch (name){
-            case "adminMemuSwitch":
-                adminMemuSwitch.value = !adminMemuSwitch.value;
-                console.log("检索到输入的内容是：", name);
-                break;
-        }
+    function switchTarget(){
+        adminMemuSwitch.value = !adminMemuSwitch.value;
     }
+
     return {
         adminMemuSwitch,
         switchTarget,

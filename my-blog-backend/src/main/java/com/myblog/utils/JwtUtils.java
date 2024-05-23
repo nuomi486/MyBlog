@@ -43,7 +43,7 @@ public class JwtUtils {
     public String createJwt(UserDetails user, AccountDTO userDatives){
         Algorithm algorithm = Algorithm.HMAC256(key);
         return JWT.create()
-                .withJWTId(UUID.randomUUID().toString())
+                .withJWTId(UUID.randomUUID().toString().replaceAll("-",""))
                 .withClaim("id", userDatives.getId())
                 .withClaim("userName", userDatives.getUsername())
                 .withClaim("password", userDatives.getPassword())

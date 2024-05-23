@@ -11,8 +11,10 @@ public class AccountDTO {
     String password;
     String email;
     String role;
-    Long phone_number;
+    Long phoneNumber;
     String img;
     String motto;
     Date createdate;
+    String token;
+    Date expire;
 }

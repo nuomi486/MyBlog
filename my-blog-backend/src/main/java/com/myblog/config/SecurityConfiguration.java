@@ -1,15 +1,13 @@
 package com.myblog.config;
 
-import com.myblog.entity.vo.Account;
 import com.myblog.entity.RestBean;
-import com.myblog.filter.JetAuthorizeFilter;
 import com.myblog.entity.dto.AccountDTO;
+import com.myblog.filter.JetAuthorizeFilter;
 import com.myblog.service.AuthorizeService;
 import com.myblog.utils.JwtUtils;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.BeanUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -34,7 +32,6 @@ public class SecurityConfiguration{
 
     @Resource
     AuthorizeService authorizeService;
-
     @Resource
     JetAuthorizeFilter authorizeFilter;
 
@@ -104,7 +101,7 @@ public class SecurityConfiguration{
         } else if (asAuthentication instanceof Authentication authentication) {
             // 获取用户详细信息
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-            // 根据用户名获取账户信息
+            // 根据用户名获取数据库内的账户信息
             AccountDTO byUser = authorizeService.findByUserName(authentication.getName());
             // 创建JWT令牌
             String jwt = utils.createJwt(userDetails,byUser);
@@ -112,16 +109,12 @@ public class SecurityConfiguration{
                 // 如果JWT为空，则返回登录验证频繁错误
                 writer.write(RestBean.authorizeFailure("登录验证频繁，请稍后再试!").asJsonString());
             } else {
-                // 创建Account对象
-                Account info = new Account();
-                // 将账户信息里相同的属性拷贝到新的对象
-                BeanUtils.copyProperties(byUser,info);
                 // 设置JWT令牌
-                info.setToken(jwt);
+                byUser.setToken(jwt);
                 // 设置过期时间
-                info.setExpire(utils.expressTime());
-                // 返回成功响应，包含Account信息
-                writer.write(RestBean.success(info).asJsonString());
+                byUser.setExpire(utils.expressTime());
+                // 返回成功响应
+                writer.write(RestBean.success(byUser).asJsonString());
             }
         }
     }

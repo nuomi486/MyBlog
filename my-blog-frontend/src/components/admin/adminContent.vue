@@ -8,21 +8,23 @@ const memuSwitch = computed( ()=>{
   return useSwitchStores().adminMemuSwitch;
 });
 
-function target(name){
-  useSwitchStores().switchTarget(name)
+function target(){
+  useSwitchStores().switchTarget()
 }
+
+
 </script>
 
 <template>
   <div class="layout-admin">
     <div class="nav-title">
-      <el-page-header @back="target('adminMemuSwitch')">
+      <el-page-header @back="target()">
         <template #icon>
           <el-icon v-if="memuSwitch"><Expand /></el-icon>
           <el-icon v-else><Fold /></el-icon>
         </template>
         <template #title>
-          菜单
+          Memu
         </template>
         <template #content>
           <span class="text-large font-600 mr-3"> {{ useRoute().name }} </span>
@@ -59,5 +61,4 @@ function target(name){
     padding: 10px;
   }
 }
-
 </style>

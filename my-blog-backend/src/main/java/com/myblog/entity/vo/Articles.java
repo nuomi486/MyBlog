@@ -11,6 +11,7 @@ public class Articles {
     int categoryId;
     Date createdAt;
     String status;
+    String content;
     int authorId;
     String userName;
     String categoryTitle;

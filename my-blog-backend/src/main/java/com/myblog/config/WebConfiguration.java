@@ -1,5 +1,6 @@
 package com.myblog.config;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +18,7 @@ public class WebConfiguration implements WebMvcConfigurer {
     private String UPLOAD_FOLDER;
 
     @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    public void addResourceHandlers(@NotNull ResourceHandlerRegistry registry) {
         WebMvcConfigurer.super.addResourceHandlers(registry);
         //将本地文件夹映射到请求头 => /upload/**
         registry.addResourceHandler("/upload/**").addResourceLocations("file:" + UPLOAD_FOLDER);

@@ -33,8 +33,9 @@ function takeAccessToken() {
     return authObj.token;
 }
 
-function storeAccessToken(remember, token, expire, userName){
+function storeAccessToken(remember, uid, token, expire, userName){
     const authObj = {
+        uid: uid,
         token: token,
         expire: expire,
         userName: userName
@@ -61,8 +62,8 @@ function internalPost(url, data, headers, success, failure, error = defaultError
     }).catch(err => error(err));
 }
 
-function internalGet(url, success, error = defaultError){
-    axios.get(url)
+function internalGet(url, headers, success, error = defaultError){
+    axios.get(url, { headers: headers })
         .then(({data}) => {
             if(data.code === 200)
                 success(data.data);
@@ -78,13 +79,13 @@ function login(username, password, remember, success, failure = defaultFailure){
     }, {
         'Content-Type': 'application/x-www-form-urlencoded'
     }, (data) => {
-        storeAccessToken(remember, data.token, data.expire, data.username);
+        storeAccessToken(remember, data.id, data.token, data.expire, data.username);
         ElMessage.success(`登录成功，欢迎 ${data.username} 回来！`);
-        success(data);
+        success();
     }, failure);
 }
 
-function logout(failure = defaultFailure){
+function logout(){
     Get('/logout', () => {
         deleteAccessToken();
         ElMessage.success(`退出登录成功，欢迎您再次使用`);
@@ -101,7 +102,7 @@ function Post(url, header, data, success, failure = defaultFailure) {
 }
 
 function Get(url, success) {
-   internalGet(url, success);
+   internalGet(url, accessHeader(), success);
 }
 
 function unauthorized() {

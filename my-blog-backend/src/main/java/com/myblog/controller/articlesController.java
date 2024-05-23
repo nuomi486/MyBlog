@@ -1,16 +1,15 @@
 package com.myblog.controller;
 
 import com.myblog.entity.RestBean;
+import com.myblog.entity.dto.ArticlesDTO;
+import com.myblog.entity.vo.Articles;
 import com.myblog.service.ArticlesService;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.util.Objects;
 
 @Controller
@@ -18,11 +17,11 @@ import java.util.Objects;
 @RequestMapping("/articles")
 public class articlesController {
 
-    @Autowired
+    @Resource
     ArticlesService articlesService;
 
-    @PostMapping("/img/upload")
-    public RestBean<String> saveImg(@RequestPart("file") MultipartFile file){
+    @PostMapping("/upload/img")
+    public RestBean<String> saveImg(HttpServletRequest request, @RequestPart("file") MultipartFile file){
         //判空
         if (file == null)
             return RestBean.failure(401, "请选择要上传的图片");
@@ -35,7 +34,15 @@ public class articlesController {
         //判断是否为指定格式
         if (!"jpg,jpeg,gif,png".toUpperCase().contains(suffix.toUpperCase()))
             return RestBean.failure(401, "请选择jpg,jpeg,gif,png格式的图片");
+        System.out.println(request.getHeader("host"));
+        //拼接链接
+        String url = "http://" + request.getHeader("host") + articlesService.upLoad(suffix, file);
+        return RestBean.success(url);
+    }
 
-        return RestBean.success(articlesService.upLoad(suffix, file));
+    @PostMapping("/pushEssay")
+    public RestBean<String> publishEssay(@RequestBody Articles articles){
+        if (!articlesService.pushEssay(articles)) return RestBean.failure(400, "发送了不正确的数据，数据存储失败！");
+        return RestBean.success("存入成功");
     }
 }

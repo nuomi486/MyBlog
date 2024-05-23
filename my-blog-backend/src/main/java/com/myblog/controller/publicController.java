@@ -4,6 +4,7 @@ import com.myblog.entity.RestBean;
 import com.myblog.entity.dto.ArticlesDTO;
 import com.myblog.entity.vo.Account;
 import com.myblog.entity.vo.Articles;
+import com.myblog.entity.vo.Category;
 import com.myblog.service.AccountServer;
 import com.myblog.service.ArticlesService;
 import jakarta.annotation.Resource;
@@ -39,10 +40,15 @@ public class publicController {
     }
 
     @GetMapping("/getDetail")
-    public RestBean<Account> getUserDetail(){
-        Account userInfo = accountServer.getUserInfo("zhangsan");
+    public RestBean<Account> getUserDetail(String name){
+        if (name == null) name = "zhangsan";
+        Account userInfo = accountServer.getUserInfo(name);
        return RestBean.success(userInfo);
     }
 
+    @GetMapping("/getTags")
+    public RestBean<List<Category>> getTag(){
+        return RestBean.success(articlesService.getTags());
+    }
 
 }
