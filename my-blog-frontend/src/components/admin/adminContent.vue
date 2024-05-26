@@ -41,7 +41,9 @@ function target(){
       </el-page-header>
     </div>
     <div class="context-view">
-      <router-view/>
+      <el-scrollbar height="90vh">
+        <router-view/>
+      </el-scrollbar>
     </div>
   </div>
 </template>
