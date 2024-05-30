@@ -72,4 +72,12 @@ public class ArticlesServiceImpl implements ArticlesService {
                 articles.getAuthorId(),
                 articles.getCreatedAt());
     }
+
+    @Override
+    public Boolean upDateEssay(Articles articles) {
+        return articlesMapper.upDateEssay(articles.getArticleId(),
+                articles.getTitle(),
+                articles.getCategoryId(),
+                articles.getContent());
+    }
 }

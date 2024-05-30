@@ -14,4 +14,5 @@ public interface ArticlesService {
     String upLoad(String suffix, MultipartFile file);
     List<Category> getTags();
     Boolean pushEssay(Articles articles);
+    Boolean upDateEssay(Articles articles);
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.Objects;
 
 @Controller
@@ -41,8 +42,21 @@ public class articlesController {
     }
 
     @PostMapping("/pushEssay")
-    public RestBean<String> publishEssay(@RequestBody Articles articles){
+    public RestBean<String> pushEssay(@RequestBody Articles articles){
         if (!articlesService.pushEssay(articles)) return RestBean.failure(400, "发送了不正确的数据，数据存储失败！");
         return RestBean.success("存入成功");
     }
+    @PostMapping("/upDateEssay")
+    public RestBean<String> upDateEssay(@RequestBody Articles articles){
+        if (!articlesService.upDateEssay(articles)) return RestBean.failure(400, "发送了不正确的数据，数据修改失败！");
+        return RestBean.success("修改成功");
+    }
+
+
+    @GetMapping("/getList")
+    public RestBean<List<Articles>> getArticlesList(){
+        List<Articles> list = articlesService.getList();
+        return RestBean.success(list);
+    }
+
 }

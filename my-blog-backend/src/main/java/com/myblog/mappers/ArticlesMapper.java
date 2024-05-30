@@ -5,6 +5,7 @@ import com.myblog.entity.vo.Category;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.Date;
 import java.util.List;
@@ -29,4 +30,7 @@ public interface ArticlesMapper {
 
     @Insert("INSERT INTO articles (title, content, categoryId, authorId, createdAt) VALUE (#{title}, #{content}, #{categoryId}, #{authorId}, #{createdAt})")
     Boolean pushEssay(String title, String content, Integer categoryId, Integer authorId, Date createdAt);
+
+    @Update("update articles set title = #{title}, content = #{content}, categoryId=#{categoryId}  WHere articleId = #{articleId}")
+    Boolean upDateEssay(Integer articleId, String title, Integer categoryId, String content);
 }
