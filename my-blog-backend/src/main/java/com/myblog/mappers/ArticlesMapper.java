@@ -2,10 +2,7 @@ package com.myblog.mappers;
 
 import com.myblog.entity.dto.ArticlesDTO;
 import com.myblog.entity.vo.Category;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.Date;
 import java.util.List;
@@ -33,4 +30,7 @@ public interface ArticlesMapper {
 
     @Update("update articles set title = #{title}, content = #{content}, categoryId=#{categoryId}  WHere articleId = #{articleId}")
     Boolean upDateEssay(Integer articleId, String title, Integer categoryId, String content);
+
+    @Delete("DELETE FROM articles WHERE articleId = #{Id}")
+    Boolean deleteEssayById(Integer Id);
 }

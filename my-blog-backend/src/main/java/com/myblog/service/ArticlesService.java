@@ -15,4 +15,6 @@ public interface ArticlesService {
     List<Category> getTags();
     Boolean pushEssay(Articles articles);
     Boolean upDateEssay(Articles articles);
+
+    Boolean deleteEssay(Integer id);
 }

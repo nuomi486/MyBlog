@@ -51,7 +51,12 @@ public class articlesController {
         if (!articlesService.upDateEssay(articles)) return RestBean.failure(400, "发送了不正确的数据，数据修改失败！");
         return RestBean.success("修改成功");
     }
-
+    @PostMapping("/deleteEssay")
+    public RestBean<String> deleteEssay(@RequestBody Integer articleId){
+        if (articleId == null) return RestBean.failure(400, "发送了不正确的数据，数据修改失败！");
+        if (!articlesService.deleteEssay(articleId)) return RestBean.failure(400, "执行失败，请联系管理员！");
+        return RestBean.success("删除成功！");
+    }
 
     @GetMapping("/getList")
     public RestBean<List<Articles>> getArticlesList(){

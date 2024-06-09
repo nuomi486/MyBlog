@@ -23,7 +23,7 @@
       </MdEditor>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="onSubmit">Submit</el-button>
+      <el-button type="primary" @click="onSubmit">提交</el-button>
       <el-button @click="pushLocalStorage">存草稿</el-button>
     </el-form-item>
   </el-form>

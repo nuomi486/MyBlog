@@ -80,4 +80,9 @@ public class ArticlesServiceImpl implements ArticlesService {
                 articles.getCategoryId(),
                 articles.getContent());
     }
+
+    @Override
+    public Boolean deleteEssay(Integer id) {
+        return articlesMapper.deleteEssayById(id);
+    }
 }

@@ -9,7 +9,7 @@
     <el-table-column prop="content" label="content" width="600" :show-overflow-tooltip="true" />
     <el-table-column fixed="right" label="Operations" width="120">
       <template #default="scope">
-        <el-button link type="primary" size="small">Delete</el-button>
+        <el-button link type="primary" size="small" @click="onDelete(scope.$index, scope.row)">Delete</el-button>
         <el-button link type="primary" size="small" @click="dialogClick(scope.row)">Edit</el-button>
       </template>
     </el-table-column>
@@ -85,7 +85,7 @@ const tableData = ref([]);
      activeTag.value = Tags.value[item.categoryId - 1].name;
    })
  }
- //行的提交操作
+ //提交操作
  function onSubmit(){
    dialogTableVisible.value = !dialogTableVisible.value;//弹窗是否显示
    dialogDetail.value.createdAt = new Date(dialogDetail.value.createdAt);//将时间转回原来的格式
@@ -95,15 +95,31 @@ const tableData = ref([]);
        "Content-Type": "application/json"
      }, dialogDetail.value, (data)=>{
        ElMessage.success(data);
+       tableData.value.map((item)=>{
+         item.createdAt = formatDateTime(item.createdAt);
+       })//重新格式化时间
      });
    else ElMessage.warning("标题不能为空！");
    dialogDetail.value = null;//回空免得干扰其他值
  }
 
+ //删除操作
+function onDelete(index, item){
+   const articleId = item.articleId;
+  if (dialogDetail.value.title !== '')
+    Post("articles/deleteEssay",{
+    "Content-Type": "application/json"
+    }, articleId, (data)=>{
+      ElMessage.success(data);
+      tableData.value.splice(index, 1);
+    });
+  else ElMessage.warning("失败！");
+}
+
 //获取列表
 Get("api/auth/getList", (data) => {
   data.map((item)=>{
-    item.createdAt = formatDateTime(item.createdAt)
+    item.createdAt = formatDateTime(item.createdAt);
   });
   tableData.value = data; // 将结果传递给 Promise 的 resolve 函数
 });
